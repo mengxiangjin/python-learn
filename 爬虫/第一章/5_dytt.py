@@ -1,5 +1,6 @@
 import requests
 import re
+import logging
 
 
 
@@ -19,6 +20,8 @@ obj3 = re.compile(r'◎片　　名(?P<title>.*?)<br />.*?'
 
 url_list = []
 it = obj1.finditer(resp.text)
+logging.captureWarnings(True)
+
 for i in it:
     content = i.group('content').strip()
     itt = obj2.finditer(content)
@@ -30,5 +33,6 @@ for i in url_list:
     resp.encoding = 'gb2312'
     res = obj3.search(resp.text)
     print(res.group('title').strip())
+    print(res.group('download_url').strip())
 
 resp.close()
