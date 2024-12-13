@@ -48,12 +48,16 @@ if __name__ == '__main__':
 
 
     # 将JSON字符串列表写入文件
-    fp = codecs.open('output.json', 'a+', 'utf-8')
-    fp.write(json.dumps(result,ensure_ascii=False))
-    fp.close()
+    # fp = codecs.open('output.json', 'a+', 'utf-8')
+    # fp.write(json.dumps(result,ensure_ascii=False))
+    # fp.close()
     # with open('output.json', 'w') as f:
     #     json.dump(result,f,ensure_ascii=False)
 
 
     # 关闭工作簿
     wb.close()
+    user_input = input('请输入')
+    print(user_input)
+    res = [item for item in result if user_input in item['city']]
+    print(res)
