@@ -1,0 +1,12 @@
+#网易云评论抓取
+#https://music.163.com/weapi/comment/resource/comments/get请求
+import requests
+
+url = 'https://music.163.com/weapi/comment/resource/comments/get?csrf_token='
+#"params=XUnCYQCZiZyWdJ7Kh2DlxbaPbyAxrHQOUpMHQVuxBXStqln3TkYiW8d4FopDS34U&encSecKey=9b50afcc96768670a7b37c8fa4c2a7d0bee7a5c9eef4d6305cdb2cc4e0964b7329673f9ad9b7851a8f74c5b9a0527a6bb5a54649514de22a00336e905af9db184d5be25dd665a790b53277a0e57a3c73353d7181cd21bd1bf77709036a6206349c0e980a3c78b9d106ecdb8abdcc84e30be1f515d69cc957344b82ee0779aedf"
+data = {
+    "params": "Q3LbGmshGyS+jkVjO4qUdrWZf+h08KxOarQoh3qKu8H8JkMd1hatvtRHLKxHb/E6qpoaDcU5P761u7WyApGTnedzs6+iJOHcWizOYXJvdfDbyLGKEQhYrzwGLH8SIFpnF0f4Sw46YWvd7WUFiqtbqv3mRnv1FqpjT+hTYHPrwhXimn57Akscz+tILLv5osSokG+g0tk1t8Ka1qX0gbuA+4nKEhT/EvEqNNPH0Efi4lalMp8i1fTuQprSUW7dLQlASfWkxID1yG14VUzA+h5TUw==",
+    "encSecKey": "b540db7cf5ccda98d9b35621cae29a20e375a1eee4632ce959b41e50a435effc3d4bf598612f9144ecab176446e0c389d4fa9c2f56b4d2732a465198903516bbe34f4914a5a920c9397a0f2ebf973cb85d43e1e9f5247251da18eb6d49cb16703faffb6dc0e0a0860cda973434ee52f815a24c257dc5fb8ef2e0636e49427333"
+}
+res = requests.post(url,data=data)
+print(res.text)
