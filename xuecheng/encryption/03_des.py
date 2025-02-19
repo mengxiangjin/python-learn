@@ -1,5 +1,9 @@
+import base64
+
 from Crypto.Cipher import DES
 
+
+#key+iv
 if __name__ == '__main__':
     key = b'88888888'
     data = 'Hello World'
@@ -7,6 +11,7 @@ if __name__ == '__main__':
     plaintext = data + count * "="
     des = DES.new(key,DES.MODE_ECB)
     ciphertext = des.encrypt(plaintext.encode())
+    print(base64.b64encode(ciphertext))
     print(ciphertext)
     plaintext = des.decrypt(ciphertext)
     print(plaintext)

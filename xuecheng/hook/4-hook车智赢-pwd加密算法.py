@@ -7,6 +7,9 @@ import sys
 # 连接手机设备
 rdev = frida.get_remote_device()
 
+#deviceId 437665
+#udid中 des加密的key值 appapiche168comappapiche168comap  iv:appapich
+
 # 包名：com.che168.autotradercloud
 # 车智赢+
 session = rdev.attach("车智赢+")  # app名字
