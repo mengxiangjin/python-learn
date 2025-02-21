@@ -4,18 +4,15 @@ import sys
 #spawn程序重启即开始监听hook
 rdev = frida.get_remote_device()
 # spawn写包名
-pid = rdev.spawn(["com.che168.autotradercloud"])
+pid = rdev.spawn(["com.hupu.shihuo"])
 session = rdev.attach(pid)
 
 scr = """
 Java.perform(function () {
-    // 包.类
-    var SecurityUtil = Java.use("com.autohome.ahkit.utils.SecurityUtil");
-    SecurityUtil.encodeMD5.implementation = function(str){
-        console.log("明文：",str);
-        var res = this.encodeMD5(str);
-        console.log("md5加密结果=",res);
-        return "305eb636-eb15-4e24-a29d-9fd60fbc91bf";
+    var UpdateDialog = Java.use('com.azhon.appupdate.dialog.UpdateDialog');
+    UpdateDialog.show.implementation = function(ctx){
+        console.log("执行了");
+        //this.show();
     }
 });
 """
