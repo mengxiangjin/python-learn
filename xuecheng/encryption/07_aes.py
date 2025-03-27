@@ -5,6 +5,7 @@ def aes_encrypt(data_string,key):
     aes = AES.new(
         key=key.encode('utf-8'),
         mode=AES.MODE_ECB,
+        #可能有iv
     )
     raw = pad(data_string.encode('utf-8'), 16)
     return aes.encrypt(raw)

@@ -97,7 +97,7 @@ def rename_files_in_folder(folder_path, prefix):
                 index = index + 1
 
 def move_files_in_folder(folder_path):
-    target_path = 'C:/Users/hh/Desktop/安静书素材/手账素材/beijing'
+    target_path = 'C:/Users/hh/Desktop/小组件/彩图/风景自然'
     for filename in os.listdir(folder_path):
         file_path = os.path.join(folder_path, filename)
         # 检查是否是文件（排除文件夹）
@@ -113,32 +113,32 @@ def move_files_in_folder(folder_path):
 
 if __name__ == '__main__':
     # 示例使用
-    # folder_path = 'C:/Users/hh/Desktop/安静书素材/手账素材/背景'  # 替换为你的文件夹路径
-    # prefix = 'shouzhang_beijing_'  # 文件名前缀
-    # rename_files_in_folder(folder_path, prefix)
+    folder_path = 'C:/Users/hh/Desktop/小组件/黑白图/人物全身'  # 替换为你的文件夹路径
+    prefix = 'ic_bw_quanshen_'  # 文件名前缀
+    rename_files_in_folder(folder_path, prefix)
     # move_files_in_folder(folder_path)
 
 
-    result_list = []
-    url = 'https://www.duanjuwang.cc'
-    response = requests.get(f'{url}/vodtype/duanju.html')
-    soup = BeautifulSoup(response.text, 'html.parser')
-    div_list = soup.findAll('div',attrs={'class':'stui-pannel stui-pannel-bg clearfix'})[1:]
-    for div in div_list:
-        category = div.find('h3',attrs={'class':'title'}).text
-        li_list = div.find('ul',attrs={'class':'stui-vodlist clearfix'}).findAll('li')
-
-        for li in li_list:
-            status = li.find('span',attrs = {'class': 'pic-text text-right'}).text
-            href = li.find('h4').find('a')['href']
-            title = li.find('h4').find('a').text
-            # print(status,href,title,category)
-            get_details(f'{url}{href}',status,title,category)
-            time.sleep(1)
-        #     break
-        # if len(result_list) == 3:
-        #     break
-    result_list = [bean.__dict__ for bean in result_list]
-    with open('data.json','w',encoding='UTF-8') as f:
-        json.dump(result_list,f,ensure_ascii=False)
+    # result_list = []
+    # url = 'https://www.duanjuwang.cc'
+    # response = requests.get(f'{url}/vodtype/duanju.html')
+    # soup = BeautifulSoup(response.text, 'html.parser')
+    # div_list = soup.findAll('div',attrs={'class':'stui-pannel stui-pannel-bg clearfix'})[1:]
+    # for div in div_list:
+    #     category = div.find('h3',attrs={'class':'title'}).text
+    #     li_list = div.find('ul',attrs={'class':'stui-vodlist clearfix'}).findAll('li')
+    #
+    #     for li in li_list:
+    #         status = li.find('span',attrs = {'class': 'pic-text text-right'}).text
+    #         href = li.find('h4').find('a')['href']
+    #         title = li.find('h4').find('a').text
+    #         # print(status,href,title,category)
+    #         get_details(f'{url}{href}',status,title,category)
+    #         time.sleep(1)
+    #     #     break
+    #     # if len(result_list) == 3:
+    #     #     break
+    # result_list = [bean.__dict__ for bean in result_list]
+    # with open('data.json','w',encoding='UTF-8') as f:
+    #     json.dump(result_list,f,ensure_ascii=False)
 
