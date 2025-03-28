@@ -6,12 +6,6 @@ import sys
 #运行程序开始监听，模拟器应用操作模拟，触发监听
 # 连接手机设备
 rdev = frida.get_remote_device()
-
-#deviceId 437665
-#udid中 des加密的key值 appapiche168comappapiche168comap  iv:appapich
-
-# 包名：com.che168.autotradercloud
-# 车智赢+
 session = rdev.attach("哔哩哔哩")  # app名字
 
 # ----上面固定------以后只会动src中代码
