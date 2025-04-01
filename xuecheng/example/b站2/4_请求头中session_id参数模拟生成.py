@@ -2,6 +2,6 @@
 import random
 
 if __name__ == '__main__':
-    session_id = "".join([hex(item)[2:] for item in random.randbytes(4)])git
+    session_id = "".join([hex(item)[2:] for item in random.randbytes(4)])
     print(session_id)
     pass

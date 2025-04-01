@@ -1,0 +1,5 @@
+from urllib.parse import unquote_plus
+
+data = 'app_name=shop_android&app_version=7.83.3&client_type=android&dinfo=%7B%22ah1%22%3A%22%22%2C%22ah2%22%3A%22%22%2C%22ah3%22%3A%22%22%2C%22ah4%22%3A%22wifi%22%2C%22ah5%22%3A%221440_2712%22%2C%22ah6%22%3A1900800%2C%22ah7%22%3A8%2C%22ah8%22%3A3839954944%2C%22ah9%22%3A%22Pixel+2+XL%22%2C%22ah10%22%3A%22%22%2C%22ah11%22%3A%22%22%2C%22ah12%22%3A%22%22%2C%22ah13%22%3A%22%22%2C%22as1%22%3A%2211%22%2C%22as2%22%3A%22%22%2C%22as3%22%3A%22%22%2C%22as4%22%3A%223a48d6bacc328464%22%2C%22as5%22%3A%22%22%2C%22as6%22%3A%22%22%2C%22as7%22%3A%2230%22%2C%22ac1%22%3A%221f3fb32d-9f6a-3cb8-86d2-4c8dc359650b%22%7D&mars_cid=1f3fb32d-9f6a-3cb8-86d2-4c8dc359650b&phone_model=Pixel+2+XL&session_id=1f3fb32d-9f6a-3cb8-86d2-4c8dc359650b_shop_android_1743498686267&sys_version=30&vcspKey=4d9e524ad536c03ff203787cf0dfcd29&vcspToken=NGQ5ZTUyNGFkNTM2YzAzZmYyMDM3ODdjZjBkZmNkMjl8fHwxNzQ2MDkwNjY0fHx8.86468a170aaa365719d73f294187e176'
+res = unquote_plus(data)
+print(res)

@@ -7,7 +7,7 @@ tree = etree.parse('./dir/douban.html',parser=parser)
 print(tree)
 
 #加载html字符串
-with open('./dir/douban.html','r',encoding='UTF-8') as f:
+with open('dir/douban.html', 'r', encoding='UTF-8') as f:
     data = f.read()
 tree = etree.HTML(data)
 print(tree)

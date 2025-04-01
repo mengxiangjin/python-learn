@@ -1,0 +1,2 @@
+NewStringUTF is at  0xe4058cb5 _ZN3art3JNIILb0EE12NewStringUTFEP7_JNIEnvPKc
+3d5a6c6fbf28e31ff5d95ba5abffb8ed
