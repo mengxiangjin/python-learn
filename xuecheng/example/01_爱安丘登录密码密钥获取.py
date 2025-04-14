@@ -11,7 +11,7 @@ if __name__ == '__main__':
     rdev = frida.get_remote_device()
 
     # 包名：com.che168.autotradercloud
-    # 车智赢+
+    # 车智赢_jar包+
     session = rdev.attach("爱安丘")  # app名字
 
     # ----上面固定------以后只会动src中代码

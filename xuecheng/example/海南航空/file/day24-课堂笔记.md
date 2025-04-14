@@ -100,7 +100,7 @@ import sys
 
 rdev = frida.get_remote_device()
 
-session = rdev.attach("车智赢+")
+session = rdev.attach("车智赢_jar包+")
 
 scr = """
 Java.perform(function () {
