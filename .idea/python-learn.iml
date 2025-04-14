@@ -5,7 +5,7 @@
       <excludeFolder url="file://$MODULE_DIR$/爬虫/第三章/movie" />
       <excludeFolder url="file://$MODULE_DIR$/爬虫/第三章/xiyouji" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.12" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.13" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
