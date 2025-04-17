@@ -11,8 +11,8 @@ rdev = frida.get_remote_device()
 #udid中 des加密的key值 appapiche168comappapiche168comap  iv:appapich
 
 # 包名：com.che168.autotradercloud
-# 车智赢+
-session = rdev.attach("车智赢+")  # app名字
+# 车智赢_jar包+
+session = rdev.attach("车智赢_jar包+")  # app名字
 
 # ----上面固定------以后只会动src中代码
 # src 是字符串，写js代码

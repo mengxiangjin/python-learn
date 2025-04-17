@@ -7,7 +7,7 @@
 ```python
 # 学习过了charles抓取手机app的http包---》爱学生案例
 	-真机和模拟器
-# 后期咱们做的app，大部分都是https包---》今日南川，车智赢
+# 后期咱们做的app，大部分都是https包---》今日南川，车智赢_jar包
 ```
 
 
@@ -561,8 +561,8 @@ import sys
 rdev = frida.get_remote_device()
 
 # 包名：com.che168.autotradercloud
-# 车智赢+
-session = rdev.attach("车智赢+")  # app名字
+# 车智赢_jar包+
+session = rdev.attach("车智赢_jar包+")  # app名字
 
 # ----上面固定------以后只会动src中代码
 # src 是字符串，写js代码
@@ -635,8 +635,8 @@ import sys
 rdev = frida.get_remote_device()
 
 # 包名：com.che168.autotradercloud
-# 车智赢+
-session = rdev.attach("车智赢+")  # app名字
+# 车智赢_jar包+
+session = rdev.attach("车智赢_jar包+")  # app名字
 
 # ----上面固定------以后只会动src中代码
 # src 是字符串，写js代码
