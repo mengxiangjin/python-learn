@@ -52,7 +52,8 @@ script.load()
 sys.stdin.read()
 
 
-#存在shield，xy-platform-info  所以是so文件️添加了此请求头
+#存在shield，xy-platform-info
+# 所以是so文件️添加了此请求头
 
 # -----------------请求来了-------------------
 # 网址：
