@@ -2,7 +2,7 @@ import requests
 import subprocess
 
 method = "get"
-url = "https://www.xiaohongshu.com/api/sns/v1/system_service/vfc_code?zone=86&phone=18256027382&type=login"
+url = "https://www.xiaohongshu.com/api/sns/v1/system_service/check_code?zone=86&phone=18256027382&code=197649"
 common_params = "fid=174507372610907696d9426c0a9d4592be034529d16a&device_fingerprint=2025041721124389b728ba32dde6c23ba49fda9098452401946d56dff2f2cb&device_fingerprint1=2025041721124389b728ba32dde6c23ba49fda9098452401946d56dff2f2cb&launch_id=1745172683&tz=Asia%2FShanghai&channel=YingYongBao&versionName=6.73.0&deviceId=cbd4f703-1198-3bb3-8edf-5f8b14a338f4&platform=android&sid=session.1745073696691463090486&identifier_flag=0&t=1745377317&project_id=ECFAAF&build=6730157&x_trace_page_current=login_full_screen_sms_page&lang=zh-Hans&app_id=ECFAAF01&uis=light"
 body = "null"
 
