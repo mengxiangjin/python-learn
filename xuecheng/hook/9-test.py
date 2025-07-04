@@ -69,6 +69,55 @@ Java.perform(function () {
         return res;
     }
     
+    var HttpClientAndroid = Java.use("com.tencent.liteav.base.http.HttpClientAndroid");
+    
+    //替换类中的方法
+    HttpClientAndroid.createConnection.implementation = function(request){
+        console.log("createConnection 进来了：",request);
+        console.log("createConnection 进来了：",request.b);
+
+        var res = this.createConnection(request)
+        console.log("createConnection this.mHttpConfig.g：",this.mHttpConfig.g);
+        console.log("createConnection this.mHttpConfig.g：",this.mHttpConfig.f);
+        return res;
+    }
+    
+    
+    var URL = Java.use("java.net.URL");
+    // 假设有两个重载版本，首先明确指定重载签名
+    URL.openConnection.overload("java.net.Proxy").implementation = function(proxy) {
+        console.log("openConnection 进来了：",proxy);
+        var res = this.openConnection()
+        return res;
+    };
+    
+    URL.getHost.implementation = function(){
+        var res = this.getHost()
+         console.log("getHost 进来了：",res);
+        return res
+    }
+    
+    var HttpsUtils = Java.use("com.lzy.okgo.https.HttpsUtils");
+    HttpsUtils.prepareKeyManager.implementation = function(bksFile,password){
+        console.log("prepareKeyManager 进来了bksFile ",bksFile);
+        console.log("prepareKeyManager 进来了password ：",password);
+        var res = this.prepareKeyManager(bksFile,password)
+        return res
+    }
+    
+    
+     var HttpUtils = Java.use("com.miss.live.https.HttpUtils");
+     HttpUtils.doGet.implementation = function(ctx,urlStr,httpListener){
+        console.log("HttpUtils 进来了urlStr ",urlStr);
+        this.doGet(ctx,urlStr,httpListener)
+     }
+     
+     var HtmlUtils = Java.use("com.miss.common.utils.HtmlUtils");
+     HtmlUtils.getJson.implementation = function(ctx,fileName){
+        console.log("HtmlUtils fileName ",fileName);
+        var res = this.getJson(ctx,fileName)
+        return res
+     }
     
 });
 """
