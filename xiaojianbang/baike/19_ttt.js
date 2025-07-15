@@ -34,5 +34,11 @@ Java.perform(function() {
         return res
     }
 
+
+    var q = Java.use('com.tencent.thumbplayer.tcmedia.utils.q')
+    q.a.implementation = function (str) {
+
+    }
+
 })
 

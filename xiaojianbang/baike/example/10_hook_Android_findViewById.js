@@ -1,6 +1,6 @@
 Java.perform(function() {
     // Error: java.lang.ClassNotFoundException: Didn't find class "androidx.appcompat.app.AppCompatActivity" on path:
-    // 使用Java.enumerateLoadedClassesSync()打印所有已经加载的类路径，发现是android.support.v7.app.AppCompat
+    // 使用Java.enumerateLoadedClassesSync()打印所有已经加载的类路径，发现是android.support.v7.app.AppCompatActivity
     // var AppCompatActivity = Java.use("androidx.appcompat.app.AppCompatActivity");
 
     var AppCompatActivity = Java.use("android.support.v7.app.AppCompatActivity");
