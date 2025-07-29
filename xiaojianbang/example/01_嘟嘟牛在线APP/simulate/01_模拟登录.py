@@ -3,8 +3,7 @@ import time
 
 import requests
 
-from xuecheng.encryption.Utils import Utils
-
+from xiaojianbang.tools.Utils import Utils
 
 
 #实际就是POST请求中添加Encrypt参数
@@ -19,9 +18,10 @@ def get_encrypt(datas):
 
     #key用md5加密取了前八个字节作为des加密的key
     des_key = Utils.MD5_BYTE(key)[:8]
-    res = Utils.DES_ENCRYPT(datas,des_key,iv)
+    res = Utils.DES_ENCRYPT(datas, des_key, iv)
     print(res)
     return Utils.base64_to_str(res)
+
 
 def decrypt(text):
     key = '65102933'
@@ -31,8 +31,9 @@ def decrypt(text):
     des_key = Utils.MD5_BYTE(key)[:8]
 
     text = Utils.base64_decode(text)
-    res_json = Utils.DES_DECRYPT(text,des_key,iv)
+    res_json = Utils.DES_DECRYPT(text, des_key, iv)
     return res_json
+
 
 def get_data(para):
     list_items = [f'{key}={para[key]}' for key in list(para.keys())]
@@ -47,7 +48,7 @@ def get_data(para):
     #sign加入到原map中，排序后转为json字符串返回
     para['sign'] = sign
     new_para = dict(sorted(para.items()))
-    res = json.dumps(new_para,ensure_ascii=False)
+    res = json.dumps(new_para, ensure_ascii=False)
     return res
 
 
@@ -55,6 +56,7 @@ def get_data(para):
 def get_sign(result):
     res = Utils.MD5_HEX(result)
     return str(res).upper()
+
 
 if __name__ == '__main__':
     phone_number = input('请输入手机号码：')
@@ -84,11 +86,8 @@ if __name__ == '__main__':
     body = {
         'Encrypt': encrypt
     }
-    resp = requests.post(url=login_url,headers=headers,json=body)
+    resp = requests.post(url=login_url, headers=headers, json=body)
     print(resp.text)
     #需要解密
     result = decrypt(resp.text)
     print(result)
-
-
-
