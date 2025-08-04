@@ -362,17 +362,10 @@ Java.perform(function () {
 
     Signature.initSign.overload('java.security.PrivateKey').implementation = function (){
         console.log("Signature.sign('java.security.PrivateKey') is called!");
-        // var algorithm = this.getAlgorithm();
-        // var tag = algorithm + " sign result";
         console.log(arguments[0])
         console.log("=======================================================");
         return this.initSign.apply(this,arguments)
     }
-    //
-    // Signature.initSign.overload('java.security.PrivateKey','java.security.SecureRandom').implementation = function (){
-    //     console.log("Signature.initSign('java.security.PrivateKey','java.security.SecureRandom') is called!");
-    //     return this.initSign.apply(this,arguments)
-    // }
 });
 
 

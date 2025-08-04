@@ -95,7 +95,7 @@ def decrypt_CBC(key,encrypt_txt,iv):
     return decrypted_data.decode()
 
 if __name__ == '__main__':
-    key = '123456789'
+    key = '12345678'
     data = "这是abcd"
     encrypt_txt_ECB = encrypt_ECB(key,data)
     print(f'ECB模式下密钥：{key},数据：{data}')

@@ -45,7 +45,10 @@ def sign_data_with_sha256(private_key, data):
     #通过私钥创建签名对象
     signer = pkcs1_15.new(private_key)
     #对data数据进行sha256加密
-    sha256_data = SHA256.new(data.encode())
+    if (isinstance(data,bytes)):
+        sha256_data = SHA256.new(data)
+    else:
+        sha256_data = SHA256.new(data.encode())
     #对加密后的data进行签名,得到签名后的字节串
     signature = signer.sign(sha256_data)
     return signature
@@ -54,7 +57,10 @@ def sign_data_with_sha256(private_key, data):
 def verify_data_with_sha256(public_key, verify_data, signature):
     rsa_key = RSA.importKey(public_key)
     signer = pkcs1_15.new(rsa_key)
-    sha256_verify_data = SHA256.new(verify_data.encode())
+    if (isinstance(verify_data,bytes)):
+        sha256_verify_data = SHA256.new(verify_data)
+    else:
+        sha256_verify_data = SHA256.new(verify_data.encode())
     try:
         signer.verify(sha256_verify_data, signature)
         return True
