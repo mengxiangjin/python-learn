@@ -39,6 +39,33 @@ Java.perform(function() {
     }
     console.log('------------------------------枚举进程中已经加载的模块(lib)结束');
 
-    var addr = Module.findExportByName("libxiaojianbang.so","_ZN7MD5_CTX11MakePassMD5EPhjS0_");
+
+    let addr = Module.findExportByName("libencryptlib.so","Java_com_pocket_snh48_base_net_utils_EncryptlibUtils_MD5");
     console.log(addr)
+    Interceptor.attach(addr,{
+        onEnter:function (args) {
+            //参数是jstring需要转换输出
+            try {
+                var env = Java.vm.getEnv();
+                if (!args[5].isNull()) {
+                    var javaStr = env.getStringUtfChars(args[5]).readCString();
+                    console.log("args[5] (as jstring):", javaStr);
+                }
+            } catch (e) {
+                console.log("args[5] (address):", args[4]);
+            }
+        },
+        onLeave:function (res) {
+            console.log("Interceptor onLeave",res)
+            try {
+                var env = Java.vm.getEnv();
+                if (!res.isNull()) {
+                    var javaStr = env.getStringUtfChars(res).readCString();
+                    console.log("res (as jstring):", javaStr);
+                }
+            } catch (e) {
+                console.log("res (address):", res);
+            }
+        }
+    })
 })
