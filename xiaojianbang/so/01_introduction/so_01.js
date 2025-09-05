@@ -1,6 +1,5 @@
 Java.perform(function() {
 
-
     //枚举so文件下的导入表
     console.log('------------------------------导入表开始');
     var improts = Module.enumerateImports("libencryptlib.so");
