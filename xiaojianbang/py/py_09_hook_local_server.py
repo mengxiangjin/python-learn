@@ -9,7 +9,8 @@ import uvicorn
 from pydantic import BaseModel
 
 '''
-    通过rpc导出关键函数，python中可以获取到结果，进行后续网络请求等相关业务逻辑操作
+   FastAPI+uvicorn 实现本地搭建web服务器
+   通过Http请求携带参数，根据参数访问so文件函数进行加密相关，将结果传递出去
 '''
 
 
@@ -38,7 +39,7 @@ Java.perform(function () {
     rpc.exports = {
         rpcfunc: encrypt
     };
-x
+
 });
 """
 
@@ -49,12 +50,16 @@ device.resume(pid)
 time.sleep(2)
 
 
+
+#BaseModel用于自动验证传递过来的数据是否符合参数类型验证
 class Request(BaseModel):
     phone:str
     password:str
 
 app = FastAPI()
 
+
+#get请求接口 需正确传递参数phone与password
 @app.get('/enc')
 async def get_enc(phone,password):
     result = script.exports.rpcfunc(phone, password)
