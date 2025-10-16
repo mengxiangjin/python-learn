@@ -218,38 +218,6 @@ function hexToString(hexStr) {
 //     }
 // });
 
-
-//hook_dlopen
-function hook_dlopen(addr, soName, callback) {
-    Interceptor.attach(addr, {
-        onEnter: function (args) {
-            var soPath = args[0].readCString();
-            if(soPath.indexOf(soName) != -1) this.hook = true;
-        }, onLeave: function (retval) {
-            if(this.hook) callback();
-        }
-    });
-}
-
-function hook_func() {
-    var soAddr = Module.findBaseAddress("libxiaojianbang.so");
-    console.log("soAddr", soAddr);
-    var MD5Final = soAddr.add(0x3540);
-    Interceptor.attach(MD5Final, {
-        onEnter: function (args) {
-            this.args1 = args[1];
-        }, onLeave: function (retval) {
-            console.log(hexdump(this.args1));
-        }
-    });
-}
-
-var dlopen = Module.findExportByName("libdl.so", "dlopen");
-var android_dlopen_ext = Module.findExportByName("libdl.so", "android_dlopen_ext");
-//console.log(JSON.stringify(Process.getModuleByAddress(dlopen)));
-// hook_dlopen(dlopen, "libxiaojianbang.so", hook_jni2);
-// hook_dlopen(android_dlopen_ext, "libxiaojianbang.so", hook_jni2);
-
 // 内存读写
 // var soAddr = Module.findBaseAddress("libxiaojianbang.so");
 // console.log(hexdump(soAddr.add(0x38A1)));
@@ -442,12 +410,119 @@ function hook_RegisterNatives() {
 
 
 }
-hook_RegisterNatives();
+//hook_RegisterNatives();
 
 
+function inlineHook() {
+    // var nativePointer = Module.findBaseAddress("libxiaojianbang.so");
+    // var hookAddr = nativePointer.add(0x17BC);
+    // Interceptor.attach(hookAddr, {
+    //     onEnter: function (args) {
+    //         console.log("onEnter: ", this.context.x8);
+    //     }, onLeave: function (retval) {
+    //         console.log("onLeave: ", this.context.x8.toInt32());
+    //         console.log(this.context.x8 & 7);
+    //     }
+    // });
+
+    var nativePointer = Module.findBaseAddress("libxiaojianbang.so");
+    var hookAddr = nativePointer.add(0x1B70);
+    Interceptor.attach(hookAddr, {
+        onEnter: function (args) {
+            console.log("onEnter: ", this.context.x1);
+            console.log("onEnter: ", hexdump(this.context.x1));
+        }, onLeave: function (retval) {
+
+        }
+    });
+}
+
+//hook_dlopen
+function hook_dlopen(addr, soName, callback) {
+    Interceptor.attach(addr, {
+        onEnter: function (args) {
+            var soPath = args[0].readCString();
+            if(soPath.indexOf(soName) != -1) this.hook = true;
+        }, onLeave: function (retval) {
+            if(this.hook) callback();
+        }
+    });
+}
+
+function hook_func() {
+    var soAddr = Module.findBaseAddress("libxiaojianbang.so");
+    console.log("soAddr", soAddr);
+    var MD5Final = soAddr.add(0x3540);
+    Interceptor.attach(MD5Final, {
+        onEnter: function (args) {
+            this.args1 = args[1];
+        }, onLeave: function (retval) {
+            console.log(hexdump(this.args1));
+        }
+    });
+}
+
+var dlopen = Module.findExportByName("libdl.so", "dlopen");
+var android_dlopen_ext = Module.findExportByName("libdl.so", "android_dlopen_ext");
+//console.log(JSON.stringify(Process.getModuleByAddress(dlopen)));
+// hook_dlopen(dlopen, "libxiaojianbang.so", inlineHook);
+// hook_dlopen(android_dlopen_ext, "libxiaojianbang.so", inlineHook);
 
 
+function main() {
+    function hook_dlopen(addr, soName, callback) {
+        Interceptor.attach(addr, {
+            onEnter: function (args) {
+                var soPath = args[0].readCString();
+                if(soPath.indexOf(soName) != -1) hook_call_constructors();
+            }, onLeave: function (retval) {
+            }
+        });
+    }
+    var dlopen = Module.findExportByName("libdl.so", "dlopen");
+    var android_dlopen_ext = Module.findExportByName("libdl.so", "android_dlopen_ext");
+    hook_dlopen(dlopen, "libxiaojianbang.so", inlineHook);
+    hook_dlopen(android_dlopen_ext, "libxiaojianbang.so", inlineHook);
 
+    var isHooked = false;
+    function hook_call_constructors() {
+        var symbols = Process.getModuleByName("linker64").enumerateSymbols();
+        var call_constructors_addr = null;
+        for (let i = 0; i < symbols.length; i++) {
+            var symbol = symbols[i];
+            if(symbol.name.indexOf("__dl__ZN6soinfo17call_constructorsEv") != -1){
+                call_constructors_addr = symbol.address;
+            }
+        }
+        console.log("call_constructors_addr: ", call_constructors_addr);
+        Interceptor.attach(call_constructors_addr, {
+            onEnter: function (args) {
+                if(!isHooked) {
+                    hook_initarray();
+                    isHooked = true;
+                }
+            }, onLeave: function (retval) {
+            }
+        });
+    }
 
+    function hook_initarray(){
+        var xiaojianbangAddr = Module.findBaseAddress("libxiaojianbang.so");
+        var func1_addr = xiaojianbangAddr.add(0x1C54);
+        var func2_addr = xiaojianbangAddr.add(0x1C7C);
+        var func3_addr = xiaojianbangAddr.add(0x1C2C);
+        Interceptor.replace(func1_addr, new NativeCallback(function () {
+            console.log("func1 is replaced!!!");
+        }, 'void', []));
 
+        Interceptor.replace(func2_addr, new NativeCallback(function () {
+            console.log("func2 is replaced!!!");
+        }, 'void', []));
+
+        Interceptor.replace(func3_addr, new NativeCallback(function () {
+            console.log("func3 is replaced!!!");
+        }, 'void', []));
+    }
+}
+main();
 

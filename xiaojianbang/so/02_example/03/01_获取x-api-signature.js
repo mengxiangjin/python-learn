@@ -18,6 +18,8 @@ function call_active() {
     var instance = Utils.$new()
     var res = instance.signature(params1,params2)
     console.log("主动调用获取到的结果",res)
+
+    //08165c94fc606e86613cea591592804bcd8016ec
 }
 
 

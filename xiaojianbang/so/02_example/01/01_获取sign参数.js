@@ -137,7 +137,7 @@ Java.perform(function() {
                 header: true,
                 ansi: true
             }));
-            console.log("║ " + hex_output + " ║");
+            console.log("║ " + " ║");
             console.log("╚══════════════════════════════════╝");
         }
     });

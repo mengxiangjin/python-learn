@@ -13,6 +13,7 @@ function call_auth() {
 
     var res = instance.xAuthencode(context,params2,params3,params4,params5)
     console.log("主动调用获取到的结果",res)
+    //Cl7ihG9LlYOBQgbsDiFoa6diVoI=
 }
 
 
